@@ -1,6 +1,7 @@
-README
-Proyecto Programado II
+Proyecto Programado II 
+
 Arquitectura de Computadoras
+
 Instituto Tecnologico de Costa Rica
 
 Alejandro Rojas Jara
