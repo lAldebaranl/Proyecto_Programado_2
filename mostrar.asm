@@ -7,10 +7,10 @@
 ;-------------------------------------   
 
 section .bss
-buffer: resb 2048 ; A 2 KB byte buffer used for read
+buffer: resb 2048 ; Se utiliza un buffer de 2KB para la lectura
 
 section .data
-buflen: dw 2048 ; Size of our buffer to be used for read
+buflen: dw 2048 ; len del buffer
 
 section .text
 extern printf
@@ -22,38 +22,44 @@ mostrar:
 push ebp			
 mov ebp, esp	
 
-; open(char *path, int flags, mode_t mode);
-; Get our command line arguments.
-mov ebx, [file_Name]
-mov eax, 0x05 ; syscall number for open
-xor ecx, ecx ; O_RDONLY = 0
-xor edx, edx ; Mode is ignored when O_CREAT isn't specified
-int 0x80 ; Call the kernel
-test eax, eax ; Check the output of open()
-jns file_read ; If the sign flag is set (positive) we can begin reading the file
-jmp exit
+;------------------------------------------------------------------
+; open(char *path, int flags, mode_t mode);                        |
+; Utiliza el argumento guardado en file_Name para abrir un archivo.|
+;------------------------------------------------------------------
+open:
+mov ebx, file_Name
+mov eax, 0x05 ; llamada de sistema para funcion open
+xor ecx, ecx ; ecx = 0 > archivo de solo lectura
+xor edx, edx 
+int 0x80 
 
-; = Begin reading the file
+test eax, eax ; Verifica eax
+jns file_read ; Si se activa la bandera de signo(positivo), se puede leer el archivo
+jmp exit ;De otra manera sale.
 
+;--------------------------------------------------------
+;read(int fd, void *buf, size_t count);                  |
+;Leemos el archivo utilizando el file descriptor en eax  |
+;--------------------------------------------------------
 file_read:
-; read(int fd, void *buf, size_t count);
-mov ebx, eax ; Move our file descriptor into ebx
-mov eax, 0x03 ; syscall for read = 3
-mov ecx, buffer ; Our 2kb byte buffer
-mov edx, buflen ; The size of our buffer
+mov ebx, eax ; guardamos el FD en ebx
+mov eax, 0x03 ; llamada de sistema para read
+mov ecx, buffer ; Usamos el buffer de 2KB
+mov edx, buflen ; Y su len
 int 0x80
-test eax, eax ; Check for errors / EOF
-jz file_out ; If EOF, then write our buffer out.
-js exit ; If read failed, we exit.
-; Didn't read the whole file, so just output what we got and be done with it.
-; ^ This is blah and needs to be updated when I find out how 
 
-file_out:
+test eax, eax ; Revisa si hay errores / EOF (end of file)
+jz file_out ; Cuando llega al EOF, imprime el contenido.
+js exit ; Si la lectura falla, sale.
+
+;-------------------------------------------------------------
 ; write(int fd, void *buf, size_t count);
-mov edx, eax ; read returns amount of bytes read
-mov eax, 0x04 ; syscall write = 4
-mov ebx, 0x01 ; STDOUT = 1
-mov ecx, buffer ; Move our buffer into the arguments
+;-------------------------------------------------------------
+file_out:
+mov edx, eax ; guardamos en edx la cantidad de bytes leidos por read.
+mov eax, 0x04 ; llamada de sistema para write
+mov ebx, 0x01 ; Usamos la salida standard 1.
+mov ecx, buffer ; movemos el buffer al los argumentos
 int 0x80
 
 exit:
