@@ -147,7 +147,7 @@ jmp Reset_Variables
 
 Func_copiar:
 
-;call copiar
+call copiar
 ;call Ayuda_Comando
 jmp Reset_Variables
 

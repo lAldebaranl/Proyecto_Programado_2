@@ -15,42 +15,26 @@ buflen: dw 2048 ; len del buffer
 section .text
 extern printf
 extern file_Name
-extern arg1
-extern arg2
 
-global copiar
-copiar:
+global mostrar
+mostrar:
 
-push ebp			
-mov ebp, esp	
-
-;--------------------------------------------------------------------------------
-;Se crea un archivo nuevo si no existe, de otro modo se sobreescribe el existente|
-;--------------------------------------------------------------------------------
-open_newfile:
-mov ebx, arg1
-mov eax, 0x08 
-mov ecx, 0x07  
-xor edx, edx 
-int 0x80 
-
-test eax, eax ; Verifica eax
-js exit 
-push eax 
+push ebp                        
+mov ebp, esp        
 
 ;------------------------------------------------------------------
 ; open(char *path, int flags, mode_t mode);                        |
 ; Utiliza el argumento guardado en file_Name para abrir un archivo.|
 ;------------------------------------------------------------------
-open_oldfile:
-mov ebx, arg2
+open:
+mov ebx, file_Name
 mov eax, 0x05 ; llamada de sistema para funcion open
 xor ecx, ecx ; ecx = 0 > archivo de solo lectura
 xor edx, edx 
 int 0x80 
 
 test eax, eax ; Verifica eax
-jns file_read ; Si no se activa la bandera de signo(positivo), se puede leer el archivo
+jns file_read ; Si se activa la bandera de signo(positivo), se puede leer el archivo
 jmp exit ;De otra manera sale.
 
 ;--------------------------------------------------------
@@ -74,7 +58,7 @@ js exit ; Si la lectura falla, sale.
 file_out:
 mov edx, eax ; guardamos en edx la cantidad de bytes leidos por read.
 mov eax, 0x04 ; llamada de sistema para write
-pop ebx ; Usamos la salida standard 1.
+mov ebx, 0x01 ; Usamos la salida standard 1.
 mov ecx, buffer ; movemos el buffer al los argumentos
 int 0x80
 

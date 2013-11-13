@@ -24,13 +24,14 @@ copiar:
 push ebp			
 mov ebp, esp	
 
-;--------------------------------------------------------------------------------
-;Se crea un archivo nuevo si no existe, de otro modo se sobreescribe el existente|
-;--------------------------------------------------------------------------------
+;------------------------------------------------------------------
+; open(char *path, int flags, mode_t mode);                        |
+; Utiliza el argumento guardado en file_Name para abrir un archivo.|
+;------------------------------------------------------------------
 open_newfile:
 mov ebx, arg1
-mov eax, 0x08 
-mov ecx, 0x07  
+mov eax, 0x08 ; llamada de sistema para funcion open
+mov ecx, 0x07  ; ecx = 2 > archivo de escritura. (crea un archivo con el nombre indicado)
 xor edx, edx 
 int 0x80 
 
