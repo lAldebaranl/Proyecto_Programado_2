@@ -1,8 +1,0 @@
-Main_Prompt: Main_Prompt.o copiar.o
-	gcc -m32 -o Main_Prompt Main_Prompt.o copiar.o
-
-Main_Prompt.o: Main_Prompt.asm
-	nasm -f elf -o Main_Prompt.o Main_Prompt.asm
-
-copiar.o: copiar.asm
-	nasm -f elf -o copiar.o copiar.asm

@@ -1,9 +1,0 @@
-Mostrar
-Muestra en la salida estándar el contenido de un archivo.
-Sintaxis:
-cli> mostrar [--ayuda] nombre-archivo
-
-repositorio del proyecto:
-https://github.com/lAldebaranl/Proyecto_Programado_2.git
-
-
