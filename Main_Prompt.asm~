@@ -128,7 +128,7 @@ mov ecx, Comando
 mov ebx, arg1
 call Fetch_Arg
 
-mov eax, [arg1]
+mov eax, arg1
 cmp eax, [ayuda_In]
 jne abre_archivo
 call Ayuda_Comando
