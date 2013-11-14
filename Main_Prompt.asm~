@@ -297,6 +297,9 @@ cmp dl, ' '
 jne final_com
 mov eax, [pos_arg] ;Agregamos un 0 al final argumento (pos_arg)
 mov byte[ebx+eax], 0 ;elimina el espacio de la palabra.
+push ebx
+call printf
+add esp, 4
 ret
 ;Verifica si se esta leyendo un 0, si es asi, se guarda el argumento y
 ;se activa la bandera ult_arg para saber que ese fue el ultimo argumento.
