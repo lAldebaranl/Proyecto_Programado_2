@@ -1,0 +1,10 @@
+----------------------------------------------------------
+|Comparar                                                 |
+|Toma dos archivo y los compara línea por línea.          |
+|Sintaxis:                                                |
+|cli> comparar [--ayuda] nombre-archivo-1 nombre-archivo-2|
+|                                                         |
+|repositorio del proyecto:                                |
+|https://github.com/lAldebaranl/Proyecto_Programado_2.git |
+ ---------------------------------------------------------
+
