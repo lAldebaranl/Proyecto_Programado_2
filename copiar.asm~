@@ -36,7 +36,7 @@ xor edx, edx
 int 0x80 
 
 test eax, eax ; Verifica eax
-jns file_read ; Si la bandera de signo es positiva, se puede leer el archivo
+jns file_read ; Si no se activa la bandera de signo(positivo), se puede leer el archivo
 jmp exit ;De otra manera sale.
 
 ;--------------------------------------------------------

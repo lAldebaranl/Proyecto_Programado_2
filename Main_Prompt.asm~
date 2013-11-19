@@ -46,7 +46,7 @@ forzado_In: db '--forzado',0
 ult_arg: db 0 ;Variable para saber se ya llegamos al ultimo argumento.
 pos_arg: db 0 ;Posicion a modificar en los argumentos.
 global file_Name
-file_Name: db 'README.md' ;Nombre del archivo a abrir, ingresado por el usuario o uno de ayuda.
+file_Name: db 'README2.md' ;Nombre del archivo a abrir, ingresado por el usuario o uno de ayuda.
 catsize: times 20 db 0
 pos_com: times 2 db 0 ;Posicion que sirve de guia a medida que se analiza el comando.
 
