@@ -7,10 +7,10 @@
 ;-------------------------------------   
 
 section .bss
-buffer: resb 2048 ; Se utiliza un buffer de 2KB para la lectura
+buffer: resb 4096 ; Se utiliza un buffer de 2KB para la lectura
 
 section .data
-buflen: dw 2048 ; len del buffer
+buflen: dw 4096 ; len del buffer
 
 section .text
 extern printf
