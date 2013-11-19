@@ -1,9 +1,0 @@
- ---------------------------------------------------------------------
-|Copiar                                                               |
-|Copia el contenido de un archivo en otro nuevo.                      |
-|Sintaxis:                                                            |
-|cli> copiar [--ayuda] nombre-archivo-original nombre-archivo-nuevo   |
-|                                                                     |
-|repositorio del proyecto:                                            |
-|https://github.com/lAldebaranl/Proyecto_Programado_2.git             |
- ---------------------------------------------------------------------
